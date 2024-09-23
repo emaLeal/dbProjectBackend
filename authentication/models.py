@@ -4,6 +4,7 @@ from .managers import CustomUserManager
 
 # Create your models here.
 class User(AbstractUser):
+    '''Custom Model for an user that will be a teacher, monitor, student or admin'''
     document_id = models.CharField(max_length=20)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)

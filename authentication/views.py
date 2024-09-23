@@ -2,6 +2,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .serializers import UserSerializer
 from django.contrib.auth import get_user_model
+from rest_framework.permissions import IsAuthenticated
 
 User = get_user_model()
 
@@ -17,3 +18,19 @@ def register(request):
         user.save()
         return Response({'message': f'User {user} successfully created'}, status=201)
     return Response(serializer.errors, status=400)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_profile(request):
+    '''Recognize the authenticated user and return it for its data to be used'''
+    raw_user = request.user
+    raw_user = {
+        'id': raw_user.id,
+        'code': raw_user.code,
+        'first_name': raw_user.first_name,
+        'last_name': raw_user.last_name,
+        'email': raw_user.email,
+        'username': raw_user.username
+    }    
+   
+    return Response(raw_user, status=200)
