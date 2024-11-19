@@ -33,14 +33,21 @@ CREATE TABLE Institution (
     address VARCHAR(150)
 );
 
+CREATE TABLE Course (
+    course_id INT PRIMARY KEY AUTO INCREMENT,
+    course_name VARCHAR(150),
+    institution_id INT,
+    FOREIGN KEY (institution_id) REFERENCES Institution(institution_id)
+);
+
 CREATE TABLE Class (
     class_id INT PRIMARY KEY AUTO INCREMENT,
     class_name VARCHAR(120),
     room VARCHAR(10),
     schedule VARCHAR(200),
     date DATE,
-    institution_id INT,
-    FOREIGN KEY (institution_id) REFERENCES Institution(institution_id)
+    course_id INT,
+    FOREIGN KEY (course_id) REFERENCES Course(course_id)
 );
 
 CREATE TABLE Material (
@@ -65,8 +72,8 @@ CREATE TABLE Attendance (
 
 CREATE TABLE User_class (
     id INT PRIMARY KEY AUTO INCREMENT,
-    class_id INT,
+    course_id INT,
     student_code VARCHAR(15),
-    FOREIGN KEY (class_id) REFERENCES Class(class_id),
+    FOREIGN KEY (course_id) REFERENCES Course(course_id),
     FOREIGN KEY (student_code) REFERENCES Student(code)
 );  
