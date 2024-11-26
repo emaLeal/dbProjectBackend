@@ -26,10 +26,9 @@ def get_profile(request):
     '''Recognize the authenticated user and return it for its data to be used'''
     raw_user = request.user
     raw_user = {
-        'id': raw_user.id,
-        'code': raw_user.code,
-        'first_name': raw_user.first_name,
-        'last_name': raw_user.last_name,
+        'document_id': raw_user.code,
+        'name': raw_user.name,
+        'state': raw_user.state,
         'email': raw_user.email,
         'username': raw_user.username
     }    
