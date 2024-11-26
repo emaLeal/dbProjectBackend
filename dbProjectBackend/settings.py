@@ -58,7 +58,9 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'role.apps.RoleConfig',
     'courses.apps.CoursesConfig',
-    'classes.apps.ClassesConfig'
+    'classes.apps.ClassesConfig',
+    'student.apps.StudentConfig',
+    'question.apps.QuestionConfig'
 ]
 
 MIDDLEWARE = [
