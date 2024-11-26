@@ -14,7 +14,7 @@ def register(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        user = User.objects.get(code=serializer.data['code'])
+        user = User.objects.get(document_id=serializer.data['document_id'])
         user.set_password(serializer.data['password'])
         user.save()
         return Response({'message': f'User {user} successfully created'}, status=201)
