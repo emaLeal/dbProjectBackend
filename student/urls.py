@@ -1,6 +1,6 @@
-from .views import CourseViewSet
+from .views import StudentViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'courses', CourseViewSet, basename='course')
+router.register(r'student', StudentViewSet, basename='student')
 urlpatterns = router.urls

@@ -1,6 +1,6 @@
-from .views import CourseViewSet
+from .views import RoleViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'courses', CourseViewSet, basename='course')
+router.register(r'role', RoleViewSet, basename='role')
 urlpatterns = router.urls
