@@ -55,7 +55,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'authentication.apps.AuthenticationConfig'
+    'authentication.apps.AuthenticationConfig',
+    'role.apps.RoleConfig',
+    'courses.apps.CoursesConfig',
+    'classes.apps.ClassesConfig',
+    'student.apps.StudentConfig',
+    'question.apps.QuestionConfig'
 ]
 
 MIDDLEWARE = [

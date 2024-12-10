@@ -20,17 +20,11 @@ CREATE TABLE Student (
     FOREIGN KEY (user_id) REFERENCES User (document_id)
 );
 
-CREATE TABLE Request (
-    request_id INT PRIMARY KEY AUTO INCREMENT,
-    request_status ENUM('accepted', 'rejected', 'pending') DEFAULT 'pending' NOT NULL,
-    user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES User(document_id)
-);
-
-CREATE TABLE Institution (
-    institution_id INT PRIMARY KEY AUTO INCREMENT,
-    name VARCHAR(120),
-    address VARCHAR(150)
+CREATE TABLE Course (
+    course_id INT PRIMARY KEY AUTO INCREMENT,
+    course_name VARCHAR(150),
+    teacher_id VARCHAR(15),
+    FOREIGN KEY (teacher_id) REFERENCES User(document_id)
 );
 
 CREATE TABLE Class (
@@ -39,8 +33,8 @@ CREATE TABLE Class (
     room VARCHAR(10),
     schedule VARCHAR(200),
     date DATE,
-    institution_id INT,
-    FOREIGN KEY (institution_id) REFERENCES Institution(institution_id)
+    course_id INT,
+    FOREIGN KEY (course_id) REFERENCES Course(course_id)
 );
 
 CREATE TABLE Material (
@@ -63,10 +57,25 @@ CREATE TABLE Attendance (
     FOREIGN KEY (class_id) REFERENCES Class(class_id)
 );
 
-CREATE TABLE User_class (
-    id INT PRIMARY KEY AUTO INCREMENT,
+CREATE TABLE Question (
+    question_id INT PRIMARY KEY AUTO INCREMENT,
+    question VARCHAR(255),
+    qr_url VARCHAR(255),
     class_id INT,
-    student_code VARCHAR(15),
-    FOREIGN KEY (class_id) REFERENCES Class(class_id),
-    FOREIGN KEY (student_code) REFERENCES Student(code)
-);  
+    FOREIGN KEY (class_id) REFERENCES Class(class_id)
+);
+
+CREATE TABLE Options (
+    option_id INT PRIMARY KEY AUTO INCREMENT,
+    description VARCHAR(200),
+    question_id INT,
+    FOREIGN KEY (question_id) REFERENCES Question(question_id)
+)
+
+CREATE TABLE Student_question (
+    student_code VARCHAR(10),
+    question_id INT,
+    PRIMARY KEY (student_code, question_id),
+    answer INT,
+    FOREIGN KEY (answer) REFERENCES Options(option_id)
+)
